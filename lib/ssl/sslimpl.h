@@ -726,6 +726,7 @@ typedef struct {
     PRBool                   is_limited;
     int                      key_size_limit;
     PRBool                   tls_keygen;
+    SECOidTag                oid;
 } ssl3KEADef;
 
 /*
@@ -741,6 +742,7 @@ struct ssl3BulkCipherDefStr {
     int             block_size;
     int             tag_size;  /* authentication tag size for AEAD ciphers. */
     int             explicit_nonce_size;               /* for AEAD ciphers. */
+    SECOidTag       oid;
 };
 
 /*
@@ -751,6 +753,7 @@ struct ssl3MACDefStr {
     CK_MECHANISM_TYPE mmech;
     int              pad_size;
     int              mac_size;
+    SECOidTag        oid;
 };
 
 typedef enum {
@@ -1899,6 +1902,8 @@ extern void SSL_AtomicIncrementLong(long * x);
 SECStatus SSL_DisableDefaultExportCipherSuites(void);
 SECStatus SSL_DisableExportCipherSuites(PRFileDesc * fd);
 PRBool    SSL_IsExportCipherSuite(PRUint16 cipherSuite);
+
+SECStatus SSL_applyNSSPolicy(void);
 
 extern SECStatus
 ssl3_TLSPRFWithMasterSecret(ssl3CipherSpec *spec,

@@ -633,6 +633,7 @@ nss_Init(const char *configdir, const char *certPrefix, const char *keyPrefix,
 	passwordRequired = pk11_password_required;
     }
 
+
     /* Skip the module init if we are already initted and we are trying
      * to init with noCertDB and noModDB */
     if (!(isReallyInitted && noCertDB && noModDB)) {
