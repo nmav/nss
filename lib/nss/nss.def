@@ -1057,6 +1057,7 @@ SECMOD_InternaltoPubMechFlags;
 ;+    global:
 NSS_OptionGet;
 NSS_OptionSet;
+SECMOD_CreateModuleEx;
 ;+    local:
 ;+       *;
 ;+};

@@ -271,3 +271,9 @@ SECITEM_ZfreeArray;
 ;+    local:
 ;+       *;
 ;+};
+;+NSSUTIL_3.16 {         # NSS Utilities 3.16 release
+;+    global:
+NSSUTIL_ArgParseModuleSpecEx;
+;+    local:
+;+       *;
+;+};
