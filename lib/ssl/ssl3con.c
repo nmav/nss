@@ -8721,7 +8721,7 @@ ssl3_PickSignatureHashAlgorithm(sslSocket *ss,
 	    const SSL3SignatureAndHashAlgorithm* sh =
 		&ss->ssl3.hs.clientSigAndHash[j];
 
-	    if (NSS_GetAlgorithmPolicy(sh->hashAlg, &policy) != SECSuccess ||
+	    if (NSS_GetAlgorithmPolicy(sh->hashAlg, &policy) == SECSuccess &&
 	    	!(policy & NSS_USE_ALG_IN_SSL_KX)) {
 	    	/* We ignore hashes we don't support */
 	    	continue;

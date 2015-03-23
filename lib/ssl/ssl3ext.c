@@ -2222,7 +2222,9 @@ ssl3_ClientSendSigAlgsXtn(sslSocket * ss, PRBool append, PRUint32 maxBytes)
 	return 0;
     }
 
-    if (NSS_GetAlgorithmPolicy(SEC_OID_SHA256, &policy) == SECSuccess &&
+    /* if NSS_GetAlgorithmPolicy fails, we add the algorithms anyway, to
+     * keep compatibility with previous NSS versions */
+    if (NSS_GetAlgorithmPolicy(SEC_OID_SHA256, &policy) != SECSuccess ||
     	(policy & NSS_USE_ALG_IN_SSL_KX)) {
     	signatureAlgorithms[pos++] = tls_hash_sha256;
     	signatureAlgorithms[pos++] = tls_sig_rsa;
@@ -2233,7 +2235,7 @@ ssl3_ClientSendSigAlgsXtn(sslSocket * ss, PRBool append, PRUint32 maxBytes)
 #endif
     }
 
-    if (NSS_GetAlgorithmPolicy(SEC_OID_SHA384, &policy) == SECSuccess &&
+    if (NSS_GetAlgorithmPolicy(SEC_OID_SHA384, &policy) != SECSuccess ||
     	(policy & NSS_USE_ALG_IN_SSL_KX)) {
     	signatureAlgorithms[pos++] = tls_hash_sha384;
     	signatureAlgorithms[pos++] = tls_sig_rsa;
@@ -2244,7 +2246,7 @@ ssl3_ClientSendSigAlgsXtn(sslSocket * ss, PRBool append, PRUint32 maxBytes)
 #endif
     }
 
-    if (NSS_GetAlgorithmPolicy(SEC_OID_SHA1, &policy) == SECSuccess &&
+    if (NSS_GetAlgorithmPolicy(SEC_OID_SHA1, &policy) != SECSuccess ||
     	(policy & NSS_USE_ALG_IN_SSL_KX)) {
     	signatureAlgorithms[pos++] = tls_hash_sha1;
     	signatureAlgorithms[pos++] = tls_sig_rsa;
