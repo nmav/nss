@@ -12113,8 +12113,8 @@ SECStatus SSL_applyNSSPolicy(void)
     SSLProtocolVariant variant;
     const ssl3CipherSuiteDef *suite;
 
-    NSS_GetAlgorithmPolicy(SEC_OID_APPLY_SSL_POLICY, &policy);
-    if (!(policy & NSS_USE_POLICY_IN_SSL)) {
+    rv = NSS_GetAlgorithmPolicy(SEC_OID_APPLY_SSL_POLICY, &policy);
+    if (rv != SECSuccess || !(policy & NSS_USE_POLICY_IN_SSL)) {
         return SECSuccess;      /* do nothing */
     }
 

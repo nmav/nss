@@ -376,7 +376,7 @@ static SECStatus applyCryptoPolicy(char *policy)
     SECStatus rv;
     unsigned unknown;
 
-    if (policy == NULL) {
+    if (policy == NULL || policy[0] == 0) {
         return SECSuccess;      /* do nothing */
     }
 
